@@ -18,7 +18,7 @@
             if(isset($_GET['target'])){	            
                 $target = $_GET['target'];                        
             }
-            if(isset($_GET['id'])){	            
+            if(isset($_GET['id']) and $not_empty){	            
                 $id = $_GET['id'];
                 $script=selectScript($id);              
             } 
@@ -27,7 +27,7 @@
                 $id=$script['id'];
             } 
             else {
-                $id=1;
+                $id=0;
             }
         ?>
     </head>

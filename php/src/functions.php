@@ -48,6 +48,15 @@ function add($title, $description, $content){
 	mysqli_query($conn,$query);
 }
 
+function add_result($id, $result){
+	global $conn;
+    global $db;
+    global $table;
+	$result = $conn->real_escape_string($result);
+	$query = "UPDATE ".$table." SET result='".$result."' WHERE id=".$id;
+	mysqli_query($conn,$query);
+}
+
 function del($id){
 	global $conn;
     global $db;

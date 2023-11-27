@@ -30,7 +30,8 @@
             id SMALLINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             descript TEXT NOT NULL,
-            content TEXT NOT NULL           
+            content TEXT NOT NULL,
+            result TEXT           
             )";
         mysqli_query($conn, $query);  
     }
