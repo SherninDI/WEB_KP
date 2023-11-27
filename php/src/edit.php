@@ -1,5 +1,7 @@
 <?php 
     require_once 'functions.php';
+
+    $file = "file.php";
 	$getid=$_GET['id'];	
 	$query="SELECT * FROM ".$table." WHERE id=" .$getid;
 	$result=mysqli_query($conn,$query);	
@@ -8,61 +10,57 @@
 	$title = $text['title'];
     $description = $text['descript'];
 
-	if(isset($_POST['edit'])) {
-        
-	    // $up_content = $_POST['up_content'];
-        // $fd = fopen("file.php", 'w') or die("не удалось создать файл");
-        // fwrite($fd, $up_content);
-        // fclose($fd);
-	    // $up_title = $_POST['up_title'];
-        $up_description = $_POST['up_description'];
-        $up_content = $_POST['up_content'];
-	    $up_id = $getid;
-        // $plaintext_with_ps = strip_tags($_POST['up_content'], '<p>');
-		update($up_id, $title, $up_description, $up_content);
+
+    if( isset($_POST['edit'])) {
+
+        $up_id = $getid;
+        $up_title = $_POST['update_title'];
+        $up_description = $_POST['update_description'];
+        $up_content = $_POST['update_code'];
+        $up_content = strip_tags($up_content, "<p><b>");
+        $up_content = strtr($up_content, array('&lt;' => '<', '&gt;' => '>') );
+        file_put_contents($file, $up_content);
+
+        update($up_id, $up_title, $up_description, $up_content);
 		echo'<script> parent.location.href="index.php?id='.$up_id.'" </script>';
-	}
-	
+    }	
 	
 ?>
 <head>
-    <link href="style.css" rel="stylesheet" type="text/css"/> 
-	<script type="text/javascript" src="ckeditor5/build/ckeditor.js"></script>  
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link href="/style/style.css" rel="stylesheet" type="text/css"/> 
+	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>  
 </head>
 <body>
     <form method="post">
 
-        <div name="up_title" class="title" >
-            <?php //echo $title;?>
+        <div >
+            <h2 class="name">Название</h2>
+            <input name="update_title" value="<?php echo $title;?>">         
         </div>
 
-        <div class="description">
-            <textarea name="up_description" id="editor_desc" > 
+        <div>
+            <h2 class="name">Описание</h2>
+            <textarea name="update_description" id="update_description" > 
                 <?php echo $description;?>
             </textarea>                         
         </div>
 
-        <div id="editor_code"> 
-            <pre><code class='language-php'>     
-                <textarea  name="up_content">            
-                    <?php
-                        
-                        // $filename = 'file.php';
-                        // $text = htmlentities(file_get_contents($filename));
-                        // json_encode($text);
-
-                        echo htmlentities($content);
-                    ?>                
-                </textarea> 
-            </code></pre>         
+        <div >     
+                <h2 class="name">Код скрипта</h2> 
+                <textarea id="update_code" name="update_code" >
+                    <pre><code class='language-php'><?php                       
+                            $content = strtr($content, array('<' => '&lt;', '>' => '&gt;'));
+                            $content = trim($content);
+                            $content = htmlspecialchars($content);
+                            echo $content;
+                        ?></code></pre></textarea>               
         </div>
         
         <input type="submit" name="edit" value="Редактировать">
 		    			    
         <script>
             ClassicEditor
-                .create( document.querySelector( '#editor_desc' ) )
+                .create( document.querySelector( '#update_description' ) )
                 .then( editor => {
                     window.editor = editor;
                 } )
@@ -73,7 +71,7 @@
         </script>
         <script>
             ClassicEditor
-                .create( document.querySelector( '#editor_code' ), {                                         
+                .create( document.querySelector( '#update_code' ), {                                         
                     codeBlock: {
                         languages: [
                             { language: 'php', label: 'PHP' }
@@ -88,19 +86,6 @@
                     console.error( 'There was a problem initializing the editor.', error );
                 } );            
         </script> 
-        
-        <!-- <script language="JavaScript">
-            $(document).ready(function() { // Отслеживаем полную загрузку документа
-                $.ajax({ // Готовим ajax запрос
-                    url: "file.php",  // Указываем файл, к которому обращаемся
-                     // Указываем метод, который необходимо использовать.
-                    success: function(data) { // Если успешно запрос отправлен и данные получены.
-                        // console.log(data); // Возвращаемые данные выводим в консоль
-                        $('#up_title').text(data); // Добавляем значение в поле с id = param
-                    }
-                });
-            });
-        </script> -->
     </form>
 </body>
 </html>

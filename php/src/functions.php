@@ -33,23 +33,26 @@ function update($id, $title, $description, $content) {
 	global $conn;
     global $db;
     global $table;
-	$query = "UPDATE ".$db.".".$table." SET content='".$content."', title='".$title."', descript='".$description."' WHERE id=".$id;
+	$content = $conn->real_escape_string($content);
+	// $query = "UPDATE ".$table." SET content="", title=".$title.", descript=".$description." WHERE id=".$id;
+	$query = "UPDATE ".$table." SET title='".$title."', descript='".$description."', content='".$content."' WHERE id=".$id;
 	mysqli_query($conn,$query);
 }
 
-function add($title, $content, $description){
+function add($title, $description, $content){
 	global $conn;
     global $db;
     global $table;
-	$query = "INSERT INTO ".$db.".".$table." (title,content,descript) VALUES ('".$title."','".$content."','".$description."')";
+	$content = $conn->real_escape_string($content);
+	$query = "INSERT INTO ".$db.".".$table."(title,descript,content) VALUES ('".$title."','".$description."','".$content."')";
 	mysqli_query($conn,$query);
 }
 
-// function del($id){
-// 	global $conn;
-//     global $db;
-//     global $table;
-// 	$query = "DELETE FROM ".$db.".".$table." WHERE id=".$id;
-// 	mysqli_query($conn,$query);
-// }
+function del($id){
+	global $conn;
+    global $db;
+    global $table;
+	$query = "DELETE FROM ".$db.".".$table." WHERE id=".$id;
+	mysqli_query($conn,$query);
+}
 ?>

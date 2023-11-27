@@ -3,7 +3,6 @@ html, body{
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 /* Заголовок */
 .main_header {
@@ -14,26 +13,16 @@ html, body{
     font-size: 30px;
     color: white;
     background: #1abc9c;
-    overflow: hidden;
     margin: 0;
 }
 
 /* Основная часть */
 .container {
-    /* position: sticky; */
     height: 90%;
     width: 100%;
-    overflow-x: auto;
-    /* display: inline-block;
-    
-    justify-content: space-between;
-    scroll-snap-type: y mandatory; */
+    overflow: hidden;
 }
-/* .container_item {
-    display: inline-block;
-    justify-content: space-between;
-    align-items: center;
-} */
+
 /* Содержание */
 .scripts {
     text-align: center;
@@ -43,6 +32,7 @@ html, body{
     width: 20%;
     height: 100%;
     background: #a8db19;
+    overflow-y: scroll;
 }
 .scripts_header {
     text-align: center;
@@ -58,30 +48,55 @@ html, body{
     padding: 5px;
     bottom: 10px;
 }
-/* редактировать фильтр(кнопка) */
+
+
+
+/* */
 .content {
-    float: right;
-    width: 74%;
     height: 100%;
+    width: 80%;
     background: #5528a8;
-    display: block;
-    padding-left: 3%;
-    padding-right: 3%;
     border: 0;
     margin: 0;
-    
 }
+
+.ck.ck-editor__main>.ck-editor__editable {
+    background: #5528a8;
+    border-radius: 0;
+}
+
+/* содержимое */
+.content_view {
+    height: 100%;
+    display: block;
+    overflow-y: scroll;
+}
+
+.name {
+    margin: 20px;
+    color: rgb(0, 255, 21);   
+}
+
+.buttons {
+    background-color: blue;
+    font-size: 16px; 
+    text-align: left; 
+    color: white;
+}
+
 .content_header {   
     text-align: center;
     color: white;
     font-size: 20px;
 }
+
 .content_description {
     text-align: left;
     color: white;
     font-size: 16px;
 
 }
+
 .content_code {
     height: 50%;
     text-align: left;
@@ -91,38 +106,17 @@ html, body{
     overflow-x: auto;
 }
 
-/* редактировать/добавить название */
-.title {
-    height: 10%;
-}
-.name {
-    color: rgb(0, 255, 21);   
-}
-.description {
-    height: 30%;
 
+
+
+input[name="add_title"] {
+    width: 100%;
 }
-.code {
-    height: 50%;
+input[name="update_title"] {
+    width: 100%;
 }
 
 
 
-/* заголовок названия */
-/* .header {
-    text-align: left;
-    font-size: 14px;   
-    margin: 20px;
-} */
-/* 
-
-
-
-.content_result {
-    padding: 20px;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-} */
 
 

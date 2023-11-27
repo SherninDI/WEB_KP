@@ -1,47 +1,47 @@
 <head>
-	<script type="text/javascript" src="ckeditor5/build/ckeditor.js"></script>
-    <link href="style.css" rel="stylesheet" type="text/css"/> 
-    <!-- <link href="ckeditor5/sample/styles.css" rel="stylesheet" type="text/css"/>  -->
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script> 
+    <link href="/style/style.css" rel="stylesheet" type="text/css"/> 
 </head>
 <body>
     <form method="post">
-
-        <div class="title">
-            <h2 class="name">Название</h2>
-            <input name="add_title" type="text">
-        </div>
-        
-        <div class="description">
-            <h2 class="name">Описание</h2>
-            <textarea  id="editor_desc" name="add_description">                
-            </textarea>
-        </div>
-        <div class="code">
-            <h2 class="name">Код скрипта</h2>
-            <textarea id="editor_code" name="add_code">                
-            </textarea>
-        </div>
-        <div class="add">
-            <!-- <div id="article"><p>Введите название<br></div>
-		    <input type="text" name="title"></p>
-            <div id="article"><p>Введите содержание<br></div> -->
-
-            <!-- <textarea id="editor1" name="content" cols="100" rows="1000"></textarea> -->
-            <input  type="submit" name="add" value="Добавить">
-        </div>                    		    						    				                       	    			
-		    			    
+        <div class="content_view">
+            <div class="buttons">
+                <input type="submit" name="add" value="Добавить">
+            </div>         
+            <div class="title">
+                <h2 class="name">Название</h2>
+                <input name="add_title" type="text">
+            </div>
+            
+            <div class="description">
+                <h2 class="name">Описание</h2>
+                <textarea  id="editor_desc" name="add_description"> </textarea>
+            </div>
+            <div class="code">
+                <h2 class="name">Код скрипта</h2>
+                <textarea id="editor_code" name="add_code" rows="5">
+                    <pre><code class='language-php'></code></pre>           
+                </textarea> 
+            </div>
+        </div>              		    						    				                       	    		    			    
         <script>
             ClassicEditor
                 .create( document.querySelector( '#editor_desc' ) )
                 .then( editor => {
-                
                     window.editor = editor;
+                    editor.editing.view.change((writer) => {
+                    writer.setStyle(
+                        "height",
+                        "200px",
+                        editor.editing.view.document.getRoot()
+                    );
+                    });
                 } )
+                
                 .catch( error => {
                     console.error( 'There was a problem initializing the editor.', error );
                 } );
-        </script>  
-        <script>
+            var edidorCode;
             ClassicEditor
                 .create( document.querySelector( '#editor_code' ), {                                         
                     codeBlock: {
@@ -52,7 +52,8 @@
                 })
                 
                 .then( editor => {
-                    window.editor = editor;
+                    editorCode = editor;
+                
                 } )
                 .catch( error => {
                     console.error( 'There was a problem initializing the editor.', error );
@@ -62,22 +63,28 @@
 </body>
 </html>
 <?php 
-require_once 'functions.php'; 
-	if( isset($_POST['id'])) {
-	    $cur_id = $_POST['id'];
-    }
-    if( isset($_POST['add_title'])) {
-	    $cur_title = $_POST['add_title'];
-    }
-    if( isset($_POST['add_description'])) {
-	    $cur_description= $_POST['add_description'];
-    }
-    if( isset($_POST['add_code'])) {
-	    $cur_content = $_POST['add_code'];
-    }
-
+    require_once 'functions.php'; 
+    
+    $file = "file.php";
+    $fd = fopen("file.php", 'a+') or die("не удалось открыть файл");
+    fclose($fd);
     if( isset($_POST['add'])) {
-	    add($cur_title, $cur_content, $cur_description);
+
+        if( isset($_POST['add_title'])) {
+            $cur_title = $_POST['add_title'];
+        }
+        if( isset($_POST['add_description'])) {
+            $cur_description= $_POST['add_description'];
+            $cur_description = strip_tags($cur_description, "<b>");
+        }
+        if( isset($_POST['add_code'])) {
+            $cur_content = $_POST['add_code'];
+            $cur_content = strip_tags($cur_content, "<p><b>");
+            $cur_content = strtr($cur_content, array('&lt;' => '<', '&gt;' => '>',  '<br>' => "\n") );
+            file_put_contents($file, $cur_content);
+        }
+
+	    add($cur_title, $cur_description,$cur_content);
         echo'<script> parent.location.href="index.php" </script>';        
     }	
 ?>

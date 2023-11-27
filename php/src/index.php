@@ -6,7 +6,7 @@
 <html>
    <head>
         <title> Шернин Д. И. А-07м-22 КР</title> 
-        <link href="style.css" rel="stylesheet" type="text/css"/>  
+        <link href="/style/style.css" rel="stylesheet" type="text/css"/>  
         <?php
             require_once 'functions.php';
             $text=selectText();
@@ -27,7 +27,7 @@
                 $id=$script['id'];
             } 
             else {
-                $id=0;
+                $id=1;
             }
         ?>
     </head>
