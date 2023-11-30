@@ -4,25 +4,29 @@
 </head>
 <body>
     <form method="post">
-        <div class="content_view">
-            <div class="buttons">
-                <input type="submit" name="add" value="Добавить">
-            </div>         
+        <div class="content_view">  
+            <div class="view">   
+            <h2 class="name">Название</h2>       
             <div class="title">
-                <h2 class="name">Название</h2>
+                
                 <input name="add_title" type="text">
             </div>
-            
-            <div class="description">
+
                 <h2 class="name">Описание</h2>
-                <textarea  id="editor_desc" name="add_description"> </textarea>
-            </div>
-            <div class="code">
+                <div class="description">
+                    
+                    <textarea  id="editor_desc" name="add_description"> </textarea>
+                </div>
                 <h2 class="name">Код скрипта</h2>
-                <textarea id="editor_code" name="add_code" rows="5">
-                    <pre><code class='language-php'></code></pre>           
-                </textarea> 
+                <div class="code">
+                    <textarea id="editor_code" name="add_code" rows="5">
+                        <pre><code class='language-php'></code></pre>           
+                    </textarea> 
+                </div>
             </div>
+            <div class="content_buttons">
+                <input type="submit"  class="content_button" name="add" value="Добавить">
+            </div> 
         </div>              		    						    				                       	    		    			    
         <script>
             ClassicEditor
@@ -57,7 +61,8 @@
                 } )
                 .catch( error => {
                     console.error( 'There was a problem initializing the editor.', error );
-                } );            
+                } );  
+                          
         </script>                    
     </form>
 </body>

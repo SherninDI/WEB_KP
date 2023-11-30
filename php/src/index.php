@@ -39,20 +39,17 @@
                 <div class="scripts_name">
                     <?php
                         if($not_empty) {
-                            foreach($text as $script) {
-                                echo '<button type="button" name="scripts">';                       
-                                echo "<div><a href=index.php?id=".$script['id']." href >".$script["title"]."</a></div>";
-                                echo '</button><br>';
+                            foreach($text as $script) {                          
+                                echo "<div><a href=index.php?id=".$script['id']." href class='stretched-link' >".$script["title"]." </a></div>";
+                                echo '<br>';
                             }
                         }                              
                     ?>                   
                 </div>
                 <div class="menu">
-                    <button type="button" onclick="location.href='index.php?target=add.php'">Добавить</button>
-                    <button type="button" onclick="location.href='index.php?target=filter.php'">Фильтр</button>
+                    <button type="button" class="menu_button" onclick="location.href='index.php?target=add.php'">Добавить</button>
+                    <button type="button" class="menu_button" onclick="location.href='index.php?target=filter.php'">Фильтр</button>
                 </div>
-
-
             </div> 
                            
             <iframe class = 'content' src='<?php echo $target."? id=".$id?>'> </iframe>            

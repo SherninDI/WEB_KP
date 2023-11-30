@@ -15,8 +15,10 @@
 	        $id = $_GET['id'];
             $script=selectScript($id);              
         }
-
+        echo '<div class="content_view">';
         echo '<h2 class="content_header">'.$script['title'].'</h2>';
+        
+        echo '<div class="view">';
         echo '<div class="content_description">'.$script['descript'].'</div>'; 
 
         if (file_exists($filename)) {
@@ -26,14 +28,16 @@
             echo '<div class="content_code"><pre>'.$text.'</pre></div>';
         } 
 
-        echo ' <div class="buttons">';
-        echo '<button type="button" onclick="location.href='."'edit.php?id=".$id."'".'">Редактировать</button>';
-        echo '<button type="button" onclick="location.href='."'del.php?id=".$id."'".'">Удалить</button>';
-        echo '<button type="button" onclick="location.href='."'execute.php?id=".$id."'".'">Выполнить</button>';
+        echo '<div class="content_buttons">';
+        echo '<button type="button" class="content_button" onclick="location.href='."'edit.php?id=".$id."'".'">Редактировать</button>';
+        echo '<button type="button" class="content_button" onclick="location.href='."'del.php?id=".$id."'".'">Удалить</button>';
+        echo '<button type="button" class="content_button" onclick="location.href='."'execute.php?id=".$id."'".'">Выполнить</button>';
         echo ' </div>';
 
+        echo ' </div>';
+        echo ' </div>';
     } 
     else {
-        echo "Скриптов нет!";
+        echo "<div class='content_result'>Скриптов нет!</div>";
     } 
 ?>     

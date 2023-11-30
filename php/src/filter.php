@@ -10,7 +10,10 @@
                 
             }
             file_put_contents($filename,$func, FILE_APPEND);
-        }     
+        }    
+        if( isset($_POST['clear'])) {         
+            file_put_contents($filename,"");
+        }    
     }
 
 ?>
@@ -25,7 +28,7 @@
    
         <div class="content_view">    
             <h2 class="name">Запрещенные функции</h2>    
-            <div class="functions">
+            <div class="view">
                 <?php 
                     echo "<ul class='list1'>";
                     $data = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -35,13 +38,13 @@
                         echo "</li>";
                     }
                     echo "</ul>";
-                ?>
-                  
+                ?>               
             </div>
             
-            <div class="add_finction">
+            <div class="content_buttons">
                 <input type="text" name="function">
-                <input type="submit" name="add_function" value="Добавить">
+                <input type="submit" name="add_function" class="content_button" value="Добавить">
+                <input type="submit" name="clear" class="content_button" value="Очистить">
             </div>
 
         </div>              		    						    				                       	    		    			               

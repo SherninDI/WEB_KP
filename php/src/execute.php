@@ -1,4 +1,4 @@
-<link href="style.css" rel="stylesheet" type="text/css"/> 
+<link href="/style/style.css" rel="stylesheet" type="text/css"/> 
 <?php 
     require_once 'functions.php';
     $text=selectText();
@@ -6,7 +6,7 @@
       
     $filter_filename = "file_filter.txt";
     $filename = "file.php";
-    $exists = false;
+    $count = 0;
 
     function getLines($file) {
         $f = fopen($file, 'r');
@@ -27,13 +27,10 @@
             $pos= strpos($haystack, $needle);
             if ($pos !== false) {
                 echo "<li>";
-                echo "Последнее вхождение ($needle) найдено в ($haystack)";
+                echo "Запрещенная функция ($needle) найдена в строке: ($haystack)";
                 echo "</li>";
-                $exists = false;
+                $count++;
             } 
-            // else if($pos === 0){
-            //     // $exists = true;
-            // }
         }
     }
     echo "</ul>";
@@ -43,10 +40,19 @@
 	        $id = $_GET['id'];
             $script=selectScript($id);              
         } 
-        if ($exists) {
+        if ($count === 0) {
             $result= shell_exec('php file.php');    
             add_result($id, $result);  
-            echo '<div class="content_result">'.$result.'</div>';;
+            echo '<div class="content_result">Скрипт выполнен! Результат записан в БД!<br>';
+            if(isset($_GET['id'])){	            
+                $id = $_GET['id'];
+                $script=selectScript($id);
+                echo $script['result'];              
+            }
+            echo '</div>';
+            
+        } else {
+            echo'<div class="content_result">Скрипт не выполнен!</div>';
         }
        
     } 
