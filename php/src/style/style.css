@@ -154,28 +154,6 @@ a:hover, a:active {
     margin-left: 15px;
 }
 
-
-/* описание содержимого */
-/* .content_description {
-    height: auto;
-    max-height: 20%;
-    text-align: left;
-    color: white;
-    font-size: 16px;
-    font-family: "Gill Sans Extrabold", sans-serif;
-    padding: 15px 15px 0 15px;
-} */
-/* код содержимого */
-/* .content_code {
-    height: auto;
-    max-height: 64%;
-    text-align: left;
-    color: white;
-    font-size: 14px; 
-    padding: 15px 15px 0 15px;
-    margin: 5px 0px;
-} */
-
 .content_buttons {
     height: auto;
     max-height: 15%;

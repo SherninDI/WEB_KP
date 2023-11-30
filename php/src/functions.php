@@ -34,7 +34,6 @@ function update($id, $title, $description, $content) {
     global $db;
     global $table;
 	$content = $conn->real_escape_string($content);
-	// $query = "UPDATE ".$table." SET content="", title=".$title.", descript=".$description." WHERE id=".$id;
 	$query = "UPDATE ".$table." SET title='".$title."', descript='".$description."', content='".$content."' WHERE id=".$id;
 	mysqli_query($conn,$query);
 }
