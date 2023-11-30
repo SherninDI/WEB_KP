@@ -221,6 +221,7 @@ input[type="text"] {
     font-size: 20px; 
     text-align: center;
 }
+/* CKEDITOR */
 :root {
 	--ck-color-base-foreground: red;
 	--ck-color-base-background: #2f25c5;
